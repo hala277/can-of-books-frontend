@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './Header';
-import IsLoadingAndError from './IsLoadingAndError';
+// import IsLoadingAndError from './IsLoadingAndError';
 import Footer from './Footer';
 import Profile from './components/Profile'
 import BestBooks from './BestBooks'
