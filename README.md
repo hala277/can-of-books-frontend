@@ -54,3 +54,15 @@ Start time: _____
 Finish time: _____
 
 Actual time needed to complete: _____
+
+----------------
+
+Name of feature: ____________Add and deleate data from mongo db____________________
+
+Estimate of time needed to complete: _____
+
+Start time: _____
+
+Finish time: _____
+
+Actual time needed to complete: ___3 hour__
