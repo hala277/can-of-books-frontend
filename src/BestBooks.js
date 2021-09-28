@@ -4,60 +4,61 @@ import Jumbotron from 'react-bootstrap/Jumbotron';
 import './BestBooks.css';
 // import { withAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
+import { withAuth0 } from '@auth0/auth0-react';
+import Books from './components/bookdata'
+
 
 class MyFavoriteBooks extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
-      this.state = {
-        books:[]
-      }
+    this.state = {
+      books: []
     }
-     
-    componentDidMount = async () =>{
-  
-      console.log(' in componentDidMount');
-      let booksData =await
-       axios.get(`${process.env.REACT_APP_SERVER}/books?email=hala`)
-      console.log(booksData);
-      // await axios.get
-      // let bookdata = await axios.get(booksData);
-      // console.log(booksdata);
-      this.setState({
-        books:booksData.data
-      })
-    
-      console.log('boooks data',this.state.books);
-    
-    }
+  }
+
+  componentDidMount = async () => {
+    let email = this.props.auth0.user.email
+    console.log(' in componentDidMount');
+    let booksData = `${process.env.REACT_APP_SERVER}/books?email=${email}`
+
+    let bookdata = await axios.get(booksData);
+
+    this.setState({
+      books: bookdata.data
+    })
+
+    console.log('boooks data', this.state.books);
+
+  }
   render() {
-    return(
+    return (
       <>
-      <Jumbotron>
-        <h1>My Favorite Books</h1>
-        <p>
-          This is a collection of my favorite books
-        </p>
-      
+        <Jumbotron>
+          <h1>My Favorite Books</h1>
+          <p>
+            This is a collection of my favorite books
+          </p>
 
-      </Jumbotron>
 
-      {/* {
-        this.state.books.map((book,i) =>{
-          return(
-            <>
-           
-            <h2>{book.books[0].title}</h2>
-
-            <p>{book.books[0].description}</p>
-            </>
-          )
-        })
-      } */}
-</>
+        </Jumbotron>
+        <div style={{display:"flex" , flexWrap:"wrab", flexDirection:"row" }} >
+       {this.state.books.map((book,i)=>{
+         return(
+         < div key ={i} >
+        
+         <Books key ={i} booksD = {book}/>
+       
+           </div>
+         )
+       })}
+        </div>
+       
+      </>
 
     )
   }
+
 }
 
-export default MyFavoriteBooks;
+export default withAuth0(MyFavoriteBooks);
