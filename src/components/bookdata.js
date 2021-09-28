@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
+// import Col from 'react-bootstrap/Col'
+
 
 
 
@@ -12,19 +14,22 @@ class BookData extends Component {
         console.log(this.props)
         return (
             <div>
-          
+                {/* <Col> */}
                 <Card style={{marginLeft:"30px",width: '18rem'}} >
-               
+                  
                     <Card.Body>
                      <Card.Title>{this.props.booksD.title}</Card.Title> 
                     <Card.Text>
                         {this.props.booksD.description}
                         </Card.Text>
-                        <Button variant="primary">Go somewhere</Button>
+                       
+                        {/* {this.props.booksD._id} */}
+                       
+                        <Button  onClick= {() => {this.props.deleteCatFunction(this.props.booksD._id)}} variant="primary" >Delete</Button>
                     </Card.Body>
                    
                 </Card>
-              
+              {/* </Col> */}
          
             </div>
         )
