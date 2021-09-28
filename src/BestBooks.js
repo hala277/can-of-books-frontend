@@ -57,7 +57,7 @@ class MyFavoriteBooks extends React.Component {
 
 
     this.setState({
-      books: newbooksData.data
+      books:newbooksData.data
     })
   }
 
@@ -69,7 +69,7 @@ class MyFavoriteBooks extends React.Component {
     let newbooksData = await axios.delete(`${process.env.REACT_APP_SERVER}/deleteBooks?bookID=${bookID}&email=${this.state.emailD}`)
          
     this.setState({
-      books: newbooksData.data
+      books:newbooksData.data
     })
   }
 
