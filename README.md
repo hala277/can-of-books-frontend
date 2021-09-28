@@ -42,3 +42,15 @@ Start time: __3:00pm___
 Finish time: __6:00pm___
 
 Actual time needed to complete: __1 hour___
+
+----------------
+
+Name of feature: ____________take data from mongo db server____________________
+
+Estimate of time needed to complete: _____
+
+Start time: _____
+
+Finish time: _____
+
+Actual time needed to complete: _____
