@@ -6,6 +6,9 @@ import axios from 'axios';
 import { withAuth0 } from '@auth0/auth0-react';
 import Books from './components/bookdata'
 import AddBookForm from './components/addBookForm'
+import UpdateBookForm from './components/updateBookForm'
+import { contains } from 'dom-helpers';
+
 // import Row from 'react-bootstrap/Row'
 
 class MyFavoriteBooks extends React.Component {
@@ -15,7 +18,9 @@ class MyFavoriteBooks extends React.Component {
     this.state = {
       
       books:[],
-      emailD: ''
+      emailD: '',
+      showUpdateForm: false,
+      bookInfoUpdate:{}
     }
    
 
@@ -77,6 +82,34 @@ class MyFavoriteBooks extends React.Component {
     })
   }
 
+  updateBook =async (bookInfo) =>{
+ console.log(bookInfo);
+
+  await this.setState({
+    showUpdateForm:true,
+    bookInfoUpdate:bookInfo
+   })
+  }
+
+  updateBooksForm = async (event) => {
+  event.preventDefault();
+  console.log( 'bookID',this.state.bookInfoUpdate._id)
+  let bookInfo = {
+   
+    title: event.target.title.value,
+    description: event.target.description.value,
+    status: event.target.status.value,
+    bookID:this.state.bookInfoUpdate._id,
+    email: this.state.emailD
+  }
+  let newBooksData = await axios.put(`${process.env.REACT_APP_SERVER}/updateBook`,bookInfo )
+
+  this.setState({
+    books:newBooksData.data
+  })
+  }
+
+
   render() {
     return (
       <>
@@ -94,7 +127,7 @@ class MyFavoriteBooks extends React.Component {
 
         />
         {/* <Row key={1} className={styles.container} style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start' }}> */}
-        {/* <div style={{ flexDirection: "row" ,display: "flex" }} > */}
+        <div style={{ flexDirection: "row" ,display: "flex" }} >
         {/* flexWrap: "wrab", */}
         {/* display: "flex", */}
           {this.state.books.map((book, i) => {
@@ -102,16 +135,23 @@ class MyFavoriteBooks extends React.Component {
               < div key={i} >
 
                 <Books key={i} booksD={book}
-                  deleteCatFunction={this.deleteBook} />
+                  deleteBookFunction={this.deleteBook}
+                  updateBookFunction={this.updateBook} />
 
               </div>
               
             )
           })}
-        {/* </div> */}
+        </div>
         {/* </Row> */}
         
-
+         
+         {this.state.showUpdateForm && 
+         <UpdateBookForm
+           bookInfo1 ={this.state.bookInfoUpdate}
+           updateBooksForm = {this.updateBooksForm}
+         />
+         }
       </>
 
     )
