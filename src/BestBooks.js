@@ -6,16 +6,19 @@ import axios from 'axios';
 import { withAuth0 } from '@auth0/auth0-react';
 import Books from './components/bookdata'
 import AddBookForm from './components/addBookForm'
-
+// import Row from 'react-bootstrap/Row'
 
 class MyFavoriteBooks extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      books: [],
+      
+      books:[],
       emailD: ''
     }
+   
+
   }
 
   componentDidMount = async () => {
@@ -24,13 +27,14 @@ class MyFavoriteBooks extends React.Component {
     let booksData = `${process.env.REACT_APP_SERVER}/books?email=${email}`
 
     let bookdata = await axios.get(booksData);
-
+     
     this.setState({
       books: bookdata.data,
       emailD: email
     })
 
     console.log('boooks data', this.state.books);
+    console.log(this.state.books,"ttttttttttttttttttt")
 
   }
 
@@ -53,7 +57,7 @@ class MyFavoriteBooks extends React.Component {
       status: event.target.status.value
     }
     let newbooksData = await axios.post(`${process.env.REACT_APP_SERVER}/addBooks`, bookInfo)
-
+    console.log(newbooksData);
 
 
     this.setState({
@@ -66,10 +70,10 @@ class MyFavoriteBooks extends React.Component {
     console.log('inside delete book')
     console.log(bookID)
     //  here we will send the req to the backEnd using the ID
-    let newbooksData = await axios.delete(`${process.env.REACT_APP_SERVER}/deleteBooks?bookID=${bookID}&email=${this.state.emailD}`)
+    let deletebooksData = await axios.delete(`${process.env.REACT_APP_SERVER}/deleteBooks?bookID=${bookID}&email=${this.state.emailD}`)
          
     this.setState({
-      books:newbooksData.data
+      books:deletebooksData.data
     })
   }
 
@@ -89,8 +93,10 @@ class MyFavoriteBooks extends React.Component {
           addBookFun={this.addBook}
 
         />
-
-        <div style={{ display: "flex", flexWrap: "wrab", flexDirection: "row" }} >
+        {/* <Row key={1} className={styles.container} style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start' }}> */}
+        {/* <div style={{ flexDirection: "row" ,display: "flex" }} > */}
+        {/* flexWrap: "wrab", */}
+        {/* display: "flex", */}
           {this.state.books.map((book, i) => {
             return (
               < div key={i} >
@@ -99,9 +105,12 @@ class MyFavoriteBooks extends React.Component {
                   deleteCatFunction={this.deleteBook} />
 
               </div>
+              
             )
           })}
-        </div>
+        {/* </div> */}
+        {/* </Row> */}
+        
 
       </>
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
-// import Col from 'react-bootstrap/Col'
+
 
 
 
@@ -15,7 +15,10 @@ class BookData extends Component {
         return (
             <div>
                 {/* <Col> */}
-                <Card style={{marginLeft:"30px",width: '18rem'}} >
+                {/* <CardColumns> */}
+               
+               
+                <Card style={{width: '60rem'}} >
                   
                     <Card.Body>
                      <Card.Title>{this.props.booksD.title}</Card.Title> 
@@ -29,6 +32,9 @@ class BookData extends Component {
                     </Card.Body>
                    
                 </Card>
+                
+               
+                {/* </CardColumns> */}
               {/* </Col> */}
          
             </div>
