@@ -4,11 +4,6 @@ import Button from 'react-bootstrap/Button'
 
 
 
-
-
-
-
-
 class BookData extends Component {
     render() {
         console.log(this.props)
